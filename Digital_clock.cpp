@@ -1,3 +1,5 @@
+// digital clock using ATmega32,BCD decoder,RTC and 7 segment display
+
 #include <avr/io.h>
 #include <util/delay.h>
 uint8_t ss,mm,hh;
@@ -94,10 +96,11 @@ int main(void)
 	DDRA=0xFF;
 	DDRB=0xFF;
 	PORTA=0xF0;
-	set_time(0x00,0x00,0x05);
+	set_time(0x00,0x00,0x00); // intial time
 	while(1)
 	{
-		get_time();
+		get_time(); // fetching time in hr and sec
+		// displaying time using BCD decoder on 7 segment display 
 		PORTA &=~(1<<PA0);
 		PORTB=ss;
 		_delay_us(5000);
